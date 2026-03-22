@@ -231,7 +231,28 @@
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--brown-dark);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Novo estilo para o Instagram */
+        .footer-social {
+            margin-bottom: 15px;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Fredoka', sans-serif;
+            transition: transform 0.2s;
+        }
+
+        .footer-social a:active {
+            transform: scale(0.95);
         }
 
         .payment-icons {
@@ -240,6 +261,7 @@
             gap: 15px;
             font-size: 2rem;
             color: var(--brown-light);
+            margin-top: 5px;
         }
 
         /* --- Barras e Toast --- */
@@ -570,7 +592,7 @@
             </div>
             
             <div class="image-showcase">
-                <img src="img/empada220.jpg" alt="Empadão 220g">
+                <img src="img/WhatsApp Image 2026-03-22 at 12.20.18.jpeg" alt="Empadão 220g">
             </div>
 
             <div id="lista-220g"></div>
@@ -583,6 +605,14 @@
             <i class="fa-brands fa-whatsapp" style="color: var(--whats-green);"></i> (21) 99424-7404 <br>
             <span style="font-size: 1rem; font-weight: 500;">(Selma)</span>
         </div>
+        
+        <div class="footer-social">
+            <a href="https://www.instagram.com/empada.da.selma?utm_source=qr&igsh=ejMybW43djVlcGQ4" target="_blank">
+                <i class="fa-brands fa-instagram" style="color: #E1306C; font-size: 1.8rem;"></i>
+                @empada.da.selma
+            </a>
+        </div>
+
         <p>Aceitamos:</p>
         <div class="payment-icons">
             <i class="fa-solid fa-money-bill-wave" title="Dinheiro"></i>
@@ -626,19 +656,17 @@
 
         const formatarMoeda = (valor) => valor.toFixed(2).replace('.', ',');
 
-        // --- FUNÇÃO PARA FORMATAR O CAMPO DE TROCO EM TEMPO REAL ---
         function formatarMoedaInput(e) {
-            let valor = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+            let valor = e.target.value.replace(/\D/g, ""); 
             
             if (valor === "") {
                 e.target.value = "";
                 return;
             }
             
-            // Transforma "5000" em "50.00" e depois formata
             valor = (parseInt(valor, 10) / 100).toFixed(2) + "";
             valor = valor.replace(".", ",");
-            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona pontos de milhar se necessário
+            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); 
             
             e.target.value = valor;
         }
@@ -787,7 +815,7 @@
                 return;
             }
 
-            let texto = "*Olá Selma! poderia anotar o meu pedido?*%0A%0A";
+            let texto = "*Olá Selma! Minha encomenda artesanal:*%0A%0A";
 
             for (let id in carrinho) {
                 const item = carrinho[id];
