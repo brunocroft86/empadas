@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Empada da Selma - Receita Artesanal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --orange-main: #d35400;
+            --orange-hover: #e67e22;
+            --brown-dark: #3e2312;
+            --brown-light: #5c3a21;
+            --cream-bg: #fef4e8;
+            --frame-bg: #f5e4d0;
+            --white: #ffffff;
+            --whats-green: #25D366;
+            --radius-lg: 20px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Evita vazamento horizontal no celular */
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(rgba(30, 15, 5, 0.7), rgba(30, 15, 5, 0.7)), url('img/front-view-little-yummy-cakes-lined-each-other-dark-background-sweet-pie-biscuit-cookie-tea-cake.jpg') center/cover fixed;
+            color: var(--brown-dark);
+            padding-bottom: 100px;
+        }
+
+        h1, h2, h3, .fredoka {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* --- Cabeçalho --- */
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-badge {
+            width: 100%;
+            max-width: 350px; 
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.4;
+        }
+
+        /* --- Container e Cards --- */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .menu-card {
+            background-color: var(--cream-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 2px solid #edcba6;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #d1bfae;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: var(--brown-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .image-showcase {
+            width: 100%;
+            height: 220px;
+            background-color: var(--frame-bg);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px dashed #d1bfae;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .image-showcase img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; 
+            border-radius: 8px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); 
+        }
+
+        /* --- Lista de Sabores --- */
+        .flavor-item {
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            border: 1px solid #e8d8c8;
+        }
+
+        .flavor-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .flavor-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flavor-price {
+            font-weight: 700;
+            color: var(--orange-main);
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--cream-bg);
+            padding: 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        .qty-wrapper {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            padding: 2px 5px;
+        }
+
+        .btn-qty {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--brown-light);
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .input-qty {
+            width: 30px;
+            text-align: center;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            color: var(--brown-dark);
+            background: transparent;
+        }
+
+        .btn-add {
+            background-color: var(--orange-main);
+            color: var(--white);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(211, 84, 0, 0.3);
+        }
+
+        .btn-add:active {
+            transform: scale(0.95);
+            background-color: var(--orange-hover);
+        }
+
+        /* --- Rodapé --- */
+        footer {
+            background-color: var(--cream-bg);
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 4px solid var(--orange-main);
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .footer-contact {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2rem;
+            color: var(--brown-light);
+        }
+
+        /* --- Barras e Toast --- */
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--whats-green);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+            z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .cart-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .cart-items {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .btn-finish {
+            background-color: var(--white);
+            color: var(--whats-green);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            bottom: 90px;
+            right: 15px;
+            background-color: var(--whats-green);
+            color: var(--white);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 99;
+            text-decoration: none;
+            animation: bounce 2s infinite;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--brown-dark);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show { opacity: 1; }
+
+        /* --- MODAL DO CARRINHO --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); 
+            z-index: 1000; 
+            justify-content: center; 
+            align-items: flex-end; 
+        }
+
+        .modal-content {
+            background: var(--cream-bg); 
+            width: 100%; 
+            max-width: 600px; 
+            border-top-left-radius: 25px; 
+            border-top-right-radius: 25px; 
+            padding: 25px 20px; 
+            position: relative; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            color: var(--brown-dark);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .close-modal {
+            position: absolute; 
+            top: 20px; right: 20px; 
+            font-size: 1.8rem; 
+            cursor: pointer; 
+            color: var(--brown-light); 
+        }
+
+        .modal-title {
+            font-size: 1.6rem; 
+            margin-bottom: 15px; 
+            color: var(--orange-main);
+            border-bottom: 2px dashed #d1bfae; 
+            padding-bottom: 10px; 
+        }
+
+        .cart-list { margin-bottom: 15px; }
+
+        .cart-list-item { 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 1px solid #e8d8c8; 
+            padding: 10px 0; 
+            font-size: 1rem;
+        }
+
+        .cart-list-item-name { font-weight: 600; }
+        .cart-list-item-price { font-weight: 700; color: var(--orange-main); }
+
+        .modal-total-box {
+            text-align: right; 
+            font-weight: bold; 
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: var(--brown-dark);
+        }
+
+        /* Seções do Checkout */
+        .checkout-section { 
+            margin-top: 20px; 
+            background: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #e8d8c8;
+        }
+
+        .checkout-title { font-size: 1.2rem; margin-bottom: 15px; }
+
+        .checkout-input {
+            margin-bottom: 12px; 
+            padding: 12px; 
+            width: 100%; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fafafa;
+        }
+
+        .payment-option { 
+            display: block; 
+            margin-bottom: 12px; 
+            font-size: 1.1rem; 
+            cursor: pointer;
+        }
+
+        .payment-option input {
+            transform: scale(1.3);
+            margin-right: 8px;
+            accent-color: var(--orange-main);
+        }
+
+        /* CAMPO DE TROCO FORMATADO */
+        .troco-wrapper {
+            margin-top: 8px;
+            display: none; 
+            align-items: center;
+            background-color: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .currency-symbol {
+            padding: 12px 0 12px 12px;
+            font-weight: 600;
+            color: var(--brown-dark);
+            font-size: 1rem;
+        }
+
+        .troco-input { 
+            flex: 1;
+            padding: 12px; 
+            border: none; 
+            background: transparent;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        .btn-confirm-order { 
+            background: var(--whats-green); 
+            color: white; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 25px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            cursor: pointer; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Animações */
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast" class="toast">Adicionado ao pedido! 😋</div>
+
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-xmark close-modal" onclick="fecharCarrinho()"></i>
+            <h2 class="modal-title fredoka"><i class="fa-solid fa-basket-shopping"></i> Seu Pedido</h2>
+            
+            <div id="modal-cart-items" class="cart-list">
+                </div>
+            
+            <div class="modal-total-box">
+                Total: R$ <span id="modal-total">0,00</span>
+            </div>
+            
+            <div class="checkout-section">
+                <h3 class="checkout-title fredoka"><i class="fa-solid fa-motorcycle"></i> Dados de Entrega</h3>
+                <input type="text" id="input-nome" class="checkout-input" placeholder="Quem vai receber? (Nome)">
+                <input type="text" id="input-endereco" class="checkout-input" placeholder="Endereço completo (Rua, Nº, Bairro, Complemento)">
+                <input type="text" id="input-referencia" class="checkout-input" placeholder="Ponto de referência (Opcional)">
+            </div>
+
+            <div class="checkout-section">
+                <h3 class="checkout-title fredoka"><i class="fa-solid fa-wallet"></i> Pagamento na entrega</h3>
+                
+                <label class="payment-option">
+                    <input type="radio" name="forma_pagamento" value="Dinheiro" onchange="toggleTroco()"> Dinheiro
+                </label>
+                
+                <div id="troco-wrapper" class="troco-wrapper">
+                    <span class="currency-symbol">R$</span>
+                    <input type="text" inputmode="numeric" id="input-troco" class="troco-input" placeholder="0,00" oninput="formatarMoedaInput(event)">
+                </div>
+                
+                <label class="payment-option">
+                    <input type="radio" name="forma_pagamento" value="Cartão" onchange="toggleTroco()"> Cartão (Levamos a maquininha)
+                </label>
+                
+                <label class="payment-option">
+                    <input type="radio" name="forma_pagamento" value="Pix" onchange="toggleTroco()"> Pix
+                </label>
+            </div>
+            
+            <button class="btn-confirm-order" onclick="enviarPedidoWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Enviar Pedido
+            </button>
+        </div>
+    </div>
+
+    <header>
+        <img src="img/logoca.png" alt="Selo Empada" class="logo-badge">
+        <p class="subtitle fredoka">As melhores empadas da região!<br>Faça sua encomenda.</p>
+    </header>
+
+    <main class="container">
+        
+        <div class="menu-card">
+            <div class="card-header">
+                <h2 class="card-title fredoka">Empada 30<span style="font-size: 1rem; text-transform: lowercase;">gr</span></h2>
+            </div>
+            
+            <div class="image-showcase">
+                <img src="img/30gr.jpg" alt="Empadas 30g">
+            </div>
+
+            <div id="lista-30g"></div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-header">
+                <h2 class="card-title fredoka">Empada 220<span style="font-size: 1rem; text-transform: lowercase;">gr</span></h2>
+            </div>
+            
+            <div class="image-showcase">
+                <img src="img/empada220.jpg" alt="Empadão 220g">
+            </div>
+
+            <div id="lista-220g"></div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-contact fredoka">
+            <i class="fa-brands fa-whatsapp" style="color: var(--whats-green);"></i> (21) 99424-7404 <br>
+            <span style="font-size: 1rem; font-weight: 500;">(Selma)</span>
+        </div>
+        <p>Aceitamos:</p>
+        <div class="payment-icons">
+            <i class="fa-solid fa-money-bill-wave" title="Dinheiro"></i>
+            <i class="fa-brands fa-cc-visa" title="Cartão"></i>
+            <i class="fa-brands fa-cc-mastercard" title="Cartão"></i>
+            <i class="fa-brands fa-pix" title="Pix"></i>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5521994247404" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="cart-bar">
+        <div class="cart-text">
+            <span class="cart-total fredoka">R$ <span id="total-price">0,00</span></span>
+            <span class="cart-items"><span id="items-count">0</span> itens selecionados</span>
+        </div>
+        <button class="btn-finish" onclick="abrirCarrinho()">
+            <i class="fa-solid fa-basket-shopping"></i> Ver Pedido
+        </button>
+    </div>
+
+    <script>
+        const produtos = [
+            { id: '30-frango', cat: '30g', nome: 'Frango', preco: 3.00, icone: '🐔' },
+            { id: '30-catupiry', cat: '30g', nome: 'Frango c/ Catupiry', preco: 3.00, icone: '🧀' },
+            { id: '30-calabresa', cat: '30g', nome: 'Calabresa', preco: 3.00, icone: '🥓' },
+            { id: '30-queijo', cat: '30g', nome: 'Queijo', preco: 3.00, icone: '🧀' },
+            { id: '30-camarao', cat: '30g', nome: 'CAMARÃO', preco: 4.00, icone: '🦐' },
+            
+            { id: '220-frango', cat: '220g', nome: 'Frango', preco: 10.00, icone: '🐔' },
+            { id: '220-catupiry', cat: '220g', nome: 'Frango c/ Catupiry', preco: 10.00, icone: '🧀' },
+            { id: '220-calabresa', cat: '220g', nome: 'Calabresa', preco: 10.00, icone: '🥓' },
+            { id: '220-queijo', cat: '220g', nome: 'Queijo', preco: 10.00, icone: '🧀' },
+            { id: '220-camarao', cat: '220g', nome: 'CAMARÃO', preco: 12.00, icone: '🦐' }
+        ];
+
+        let carrinho = {};
+        let totalPedido = 0;
+
+        const formatarMoeda = (valor) => valor.toFixed(2).replace('.', ',');
+
+        // --- FUNÇÃO PARA FORMATAR O CAMPO DE TROCO EM TEMPO REAL ---
+        function formatarMoedaInput(e) {
+            let valor = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+            
+            if (valor === "") {
+                e.target.value = "";
+                return;
+            }
+            
+            // Transforma "5000" em "50.00" e depois formata
+            valor = (parseInt(valor, 10) / 100).toFixed(2) + "";
+            valor = valor.replace(".", ",");
+            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona pontos de milhar se necessário
+            
+            e.target.value = valor;
+        }
+
+        function renderizarMenu() {
+            const lista30 = document.getElementById('lista-30g');
+            const lista220 = document.getElementById('lista-220g');
+            lista30.innerHTML = '';
+            lista220.innerHTML = '';
+
+            produtos.forEach(prod => {
+                const html = `
+                    <div class="flavor-item">
+                        <div class="flavor-info">
+                            <span class="flavor-name">${prod.icone} ${prod.nome}</span>
+                            <span class="flavor-price">R$ ${formatarMoeda(prod.preco)}</span>
+                        </div>
+                        <div class="controls-row">
+                            <div class="qty-wrapper">
+                                <button class="btn-qty" onclick="alterarQtd('${prod.id}', -1)">-</button>
+                                <input type="number" class="input-qty" id="input-${prod.id}" value="1" min="1" readonly>
+                                <button class="btn-qty" onclick="alterarQtd('${prod.id}', 1)">+</button>
+                            </div>
+                            <button class="btn-add" onclick="addCarrinho('${prod.id}', '${prod.nome} (${prod.cat})', ${prod.preco})">
+                                <i class="fa-solid fa-cart-shopping"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                if (prod.cat === '30g') lista30.innerHTML += html;
+                else lista220.innerHTML += html;
+            });
+        }
+
+        function alterarQtd(id, delta) {
+            const input = document.getElementById(`input-${id}`);
+            let val = parseInt(input.value) + delta;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        function addCarrinho(id, nome, preco) {
+            const input = document.getElementById(`input-${id}`);
+            const qtd = parseInt(input.value);
+
+            if (carrinho[id]) {
+                carrinho[id].quantidade += qtd;
+            } else {
+                carrinho[id] = { nome, preco, quantidade: qtd };
+            }
+
+            input.value = 1;
+            
+            atualizarRodape();
+            mostrarToast();
+        }
+
+        function atualizarRodape() {
+            totalPedido = 0;
+            let qtdItens = 0;
+
+            for (let id in carrinho) {
+                totalPedido += carrinho[id].preco * carrinho[id].quantidade;
+                qtdItens += carrinho[id].quantidade;
+            }
+
+            document.getElementById('total-price').innerText = formatarMoeda(totalPedido);
+            document.getElementById('items-count').innerText = qtdItens;
+        }
+
+        function mostrarToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 2000);
+        }
+
+        function abrirCarrinho() {
+            if (Object.keys(carrinho).length === 0) {
+                alert("Seu carrinho está vazio. Adicione algumas empadas primeiro!");
+                return;
+            }
+
+            const listaModal = document.getElementById('modal-cart-items');
+            listaModal.innerHTML = '';
+            
+            for (let id in carrinho) {
+                const item = carrinho[id];
+                const sub = item.preco * item.quantidade;
+                listaModal.innerHTML += `
+                    <div class="cart-list-item">
+                        <span class="cart-list-item-name">${item.quantidade}x ${item.nome}</span>
+                        <span class="cart-list-item-price">R$ ${formatarMoeda(sub)}</span>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modal-total').innerText = formatarMoeda(totalPedido);
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function toggleTroco() {
+            const opcoes = document.getElementsByName('forma_pagamento');
+            let selecionado = '';
+            for(let i = 0; i < opcoes.length; i++){
+                if(opcoes[i].checked){
+                    selecionado = opcoes[i].value;
+                }
+            }
+
+            const trocoWrapper = document.getElementById('troco-wrapper');
+            const inputTroco = document.getElementById('input-troco');
+            
+            if(selecionado === 'Dinheiro') {
+                trocoWrapper.style.display = 'flex'; 
+            } else {
+                trocoWrapper.style.display = 'none';
+                inputTroco.value = ''; 
+            }
+        }
+
+        function enviarPedidoWhatsApp() {
+            const nome = document.getElementById('input-nome').value.trim();
+            const endereco = document.getElementById('input-endereco').value.trim();
+            const referencia = document.getElementById('input-referencia').value.trim();
+
+            if(!nome || !endereco) {
+                alert("Por favor, preencha o nome de quem vai receber e o endereço de entrega.");
+                return;
+            }
+
+            const opcoes = document.getElementsByName('forma_pagamento');
+            let pagamentoEscolhido = '';
+            for(let i = 0; i < opcoes.length; i++){
+                if(opcoes[i].checked){
+                    pagamentoEscolhido = opcoes[i].value;
+                }
+            }
+
+            if(pagamentoEscolhido === '') {
+                alert("Por favor, selecione a forma de pagamento antes de enviar.");
+                return;
+            }
+
+            let texto = "*Olá Selma! Minha encomenda artesanal:*%0A%0A";
+
+            for (let id in carrinho) {
+                const item = carrinho[id];
+                const sub = item.preco * item.quantidade;
+                texto += `▪️ ${item.quantidade}x ${item.nome} - R$ ${formatarMoeda(sub)}%0A`;
+            }
+
+            texto += `%0A*Total: R$ ${formatarMoeda(totalPedido)}*%0A`;
+            texto += `-----------------------%0A`;
+            
+            texto += `*📍 DADOS DE ENTREGA:*%0A`;
+            texto += `*Recebedor:* ${nome}%0A`;
+            texto += `*Endereço:* ${endereco}%0A`;
+            if(referencia) {
+                texto += `*Referência:* ${referencia}%0A`;
+            }
+            texto += `-----------------------%0A`;
+
+            texto += `*💳 PAGAMENTO:*%0A`;
+            if(pagamentoEscolhido === 'Dinheiro') {
+                const trocoInfo = document.getElementById('input-troco').value;
+                texto += `Dinheiro%0A`;
+                if(trocoInfo) {
+                    texto += `*Troco para:* R$ ${trocoInfo}%0A`;
+                } else {
+                    texto += `*(Sem troco, valor exato)*%0A`;
+                }
+            } else if (pagamentoEscolhido === 'Cartão') {
+                texto += `Cartão (Levar a maquininha)%0A`;
+            } else if (pagamentoEscolhido === 'Pix') {
+                texto += `Pix%0A`;
+            }
+
+            const numeroWhatsApp = "5521994247404";
+            const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
+            
+            fecharCarrinho(); 
+            window.open(url, '_blank'); 
+        }
+
+        renderizarMenu();
+    </script>
+</body>
+</html>
