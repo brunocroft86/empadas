@@ -20,6 +20,7 @@
             --whats-green: #25D366;
             --radius-lg: 20px;
             --radius-sm: 10px;
+            --danger-red: #e74c3c; /* Cor da lixeira */
         }
 
         * {
@@ -235,7 +236,7 @@
             margin-bottom: 5px;
         }
 
-        /* Novo estilo para o Instagram */
+        /* Estilo para o Instagram */
         .footer-social {
             margin-bottom: 15px;
         }
@@ -397,13 +398,35 @@
         .cart-list-item { 
             display: flex; 
             justify-content: space-between; 
+            align-items: center; /* Centraliza a lixeira com o texto */
             border-bottom: 1px solid #e8d8c8; 
-            padding: 10px 0; 
+            padding: 12px 0; 
             font-size: 1rem;
         }
 
         .cart-list-item-name { font-weight: 600; }
+        
+        .cart-list-item-right {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espaço entre o preço e a lixeira */
+        }
+        
         .cart-list-item-price { font-weight: 700; color: var(--orange-main); }
+
+        /* Botão de Remover Item */
+        .btn-remove-item {
+            background: none;
+            border: none;
+            color: var(--danger-red);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-remove-item:active {
+            transform: scale(0.8);
+        }
 
         .modal-total-box {
             text-align: right; 
@@ -726,6 +749,19 @@
             mostrarToast();
         }
 
+        // --- NOVA FUNÇÃO PARA REMOVER ITENS ---
+        function removerDoCarrinho(id) {
+            delete carrinho[id]; // Remove o item
+            atualizarRodape(); // Atualiza os valores
+            
+            // Se o carrinho ficar vazio, fecha a janela
+            if (Object.keys(carrinho).length === 0) {
+                fecharCarrinho();
+            } else {
+                abrirCarrinho(); // Recarrega a lista do modal para sumir com o item apagado
+            }
+        }
+
         function atualizarRodape() {
             totalPedido = 0;
             let qtdItens = 0;
@@ -757,10 +793,17 @@
             for (let id in carrinho) {
                 const item = carrinho[id];
                 const sub = item.preco * item.quantidade;
+                
+                // HTML da lista agora inclui a LIXEIRA
                 listaModal.innerHTML += `
                     <div class="cart-list-item">
                         <span class="cart-list-item-name">${item.quantidade}x ${item.nome}</span>
-                        <span class="cart-list-item-price">R$ ${formatarMoeda(sub)}</span>
+                        <div class="cart-list-item-right">
+                            <span class="cart-list-item-price">R$ ${formatarMoeda(sub)}</span>
+                            <button class="btn-remove-item" onclick="removerDoCarrinho('${id}')" title="Remover item">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
                     </div>
                 `;
             }
@@ -816,7 +859,7 @@
                 return;
             }
 
-            let texto = "*Olá Selma! Minha encomenda artesanal:*%0A%0A";
+            let texto = "*Olá Selma! poderia anotar o meu pedido?*%0A%0A";
 
             for (let id in carrinho) {
                 const item = carrinho[id];
